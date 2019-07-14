@@ -5,15 +5,16 @@ import {useRouter} from 'next/router';
 let reviewPage = (props) => {
 
     let router = useRouter();
-    let pageData = [];
+    let pageData;
 
     for(let i = 0; i < props.films.results.length; i++){
         if(router.query.id == props.films.results[i].title){
             pageData = props.films.results[i]
-        } else {
-            //window.location.replace("/")
+            console.log('hey')
         }
     }
+
+    
 
     return(
         <div>
