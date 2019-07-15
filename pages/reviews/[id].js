@@ -1,6 +1,6 @@
 
 import {useRouter} from 'next/router';
-
+import fetch from 'isomorphic-unfetch';
 
 let reviewPage = (props) => {
 
@@ -10,7 +10,6 @@ let reviewPage = (props) => {
     for(let i = 0; i < props.films.results.length; i++){
         if(router.query.id == props.films.results[i].title){
             pageData = props.films.results[i]
-            console.log('hey')
         }
     }
 
