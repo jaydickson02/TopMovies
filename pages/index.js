@@ -2,33 +2,37 @@
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 
+let linkStyles = {
+    textDecoration: "none"
+}
 
+let ListItems = (props) => (
 
-let Ranking = (props) => (
-
-    <div>
-        <Link href="/reviews/[id]" as={'/reviews/' + props.id}>
-            <a>{props.id}</a>
-        </Link> 
-        
-        <span> 
-            {props.starRating} 
-        </span>
-
-    </div>
-
+    props.items.map(item =>  
+        (
+        <li key={item.title}>
+            <Link href={'reviews/[id]'} as={'reviews/' + item.title}>
+                <a style={linkStyles}>
+                    {item.title}
+                </a>
+            </Link>
+        </li>
+        )
+    )
 );
 
 
-let main = (props) => (
+let main = (props) => {
 
+    return(
     <div>
         <ul>
-            {props.films.results.map(entry => <Ranking id={entry.title} />)}
+        {<ListItems items = {props.films.results}/>}
         </ul>
     </div>
+    );
 
-);
+        };
 
 main.getInitialProps = async () => {
     const res = await fetch('http://api.themoviedb.org/3/movie/top_rated?api_key=74a80734c82b55bcc9d45771d750b136');
